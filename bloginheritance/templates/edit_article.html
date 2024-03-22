@@ -1,0 +1,28 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+<div class="container container-flex">
+    <main role="main">
+        <form action="{% url 'edit_article' article.id %}" method="post" enctype="multipart/form-data">
+            {% csrf_token %}
+            <h2>Edit Article</h2>
+            <label for="title">Title:</label>
+            <input type="text" id="title" name="title" value="{{ article.title }}"><br>
+            <label for="body">Body:</label>
+            <textarea id="body" name="body">{{ article.body }}</textarea><br>
+            <label for="image">Image:</label>
+            <input type="file" id="image" name="image"><br>
+            <img src="{{ article.image.url }}" alt="{{ article.title }}" class="article-image"><br>
+            <button type="submit">Save Changes</button>
+        </form>
+    </main>
+    <aside class="sidebar">
+        <div class="sidebar-widget">
+            <h2 class="widget-title">ABOUT ME</h2>
+            <img src="{% static 'Images/about-me.jpg' %}" alt="john doe" class="widget-image">
+            <p class="widget-body">I find life better, and I'm happier, when things are nice and simple.</p>
+        </div>
+    </aside>
+</div>
+{% endblock %}
